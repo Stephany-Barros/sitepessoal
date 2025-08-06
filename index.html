@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stephany: Sua Especialista em Canais de Atendimento Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Seus estilos CSS existentes para o portfólio */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f0fff0; /* Cor de fundo verde pastel suave */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2E8B57; /* Tom de verde mais escuro para títulos */
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: #98FB98; /* Tom pastel de verde claro para o header */
+            color: #333;
+            padding: 60px 0;
+            text-align: center;
+            border-bottom: 5px solid #2E8B57; /* Linha verde escura */
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #2E8B57; /* Título principal em verde escuro */
+        }
+
+        header h2 {
+            font-size: 1.8em;
+            margin-top: 0;
+            color: #556B2F; /* Um verde oliva suave para subtítulo */
+        }
+
+        header p {
+            font-size: 1.1em;
+            max-width: 700px;
+            margin: 20px auto 20px; /* Aumentei o margin-bottom para dar espaço ao banner */
+        }
+
+        /* Estilos do Banner (RETANGULAR) */
+        .banner-container {
+            width: 100%;
+            max-width: 900px; /* Limita a largura do banner */
+            height: 150px; /* **NOVO:** Altura fixa e baixa para o banner retangular */
+            margin: 20px auto 0; /* Espaçamento abaixo do banner */
+            overflow: hidden; /* Recorta conteúdo que excede as dimensões */
+            border-radius: 8px; /* Cantos arredondados */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Sombra para destacar */
+            background-color: #d1ffd1; /* Fundo para o caso de a imagem não carregar */
+            display: flex; /* Para centralizar o conteúdo/imagem */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .banner-container img {
+            width: 100%; /* Ocupa 100% da largura do container */
+            height: 100%; /* Ocupa 100% da altura do container */
+            object-fit: cover; /* **NOVO:** Garante que a imagem preencha o container, cortando se necessário */
+            display: block; /* Remove espaço extra abaixo da imagem */
+        }
+
+        /* Seções */
+        .section-padding {
+            padding: 60px 0;
+        }
+
+        .background-pastel-green {
+            background-color: #E0EEE0; /* Um verde pastel muito suave */
+        }
+
+        #sobre-mim, #contato {
+            text-align: center;
+        }
+
+        #servicos h3 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .servico-item {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .servico-item h4 {
+            color: #3CB371; /* Verde médio para os títulos dos serviços */
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .servico-item p {
+            color: #555;
+        }
+
+        /* Botão Principal (para a seção de contato) */
+        .botao-principal {
+            display: inline-block;
+            background-color: #3CB371; /* Verde médio */
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .botao-principal:hover {
+            background-color: #2E8B57; /* Um tom de verde mais escuro no hover */
+        }
+
+        /* Botão do Chatbot Fixo - AGORA PARA ABRIR O MODAL */
+        .botao-chatbot-fixo {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3CB371; /* Verde médio */
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000; /* Garante que fique acima de outros elementos */
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .botao-chatbot-fixo:hover {
+            background-color: #2E8B57; /* Tom de verde mais escuro no hover */
+        }
+
+        /* Footer */
+        footer {
+            background-color: #98FB98; /* Mesmo tom pastel do header */
+            color: #333;
+            padding: 40px 0 20px;
+            text-align: center;
+            border-top: 5px solid #2E8B57; /* Linha verde escura */
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column; /* Padrão para mobile */
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-info {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .footer-info h4 {
+            color: #2E8B57;
+            margin-bottom: 15px;
+        }
+
+        .footer-info p {
+            font-size: 0.95em;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .footer-photo {
+            flex-shrink: 0; /* Impede que a foto encolha */
+        }
+
+        .profile-photo {
+            width: 150px; /* Tamanho da sua foto */
+            height: 150px;
+            border-radius: 50%; /* Transforma a imagem em círculo */
+            object-fit: cover; /* Garante que a imagem preencha o círculo */
+            border: 5px solid #2E8B57; /* Borda verde ao redor da foto */
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .social-links a {
+            color: #2E8B57;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #3CB371;
+        }
+
+        /* Responsividade Básica */
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row; /* Coloca lado a lado em telas maiores */
+                justify-content: center;
+                text-align: left;
+            }
+
+            .footer-info {
+                text-align: left;
+                margin-right: 40px; /* Espaçamento entre texto e foto */
+            }
+        }
+
+        @media (max-width: 767px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            header h2 {
+                font-size: 1.5em;
+            }
+        }
+
+        /* --- NOVOS ESTILOS PARA O CHAT MODAL --- */
+        .chat-modal-overlay {
+            display: none; /* Inicia oculto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+            justify-content: center;
+            align-items: center;
+            z-index: 1001; /* Acima de tudo, incluindo o botão fixo */
+        }
+
+        .chat-modal-content {
+            background-color: #fff;
+            border-radius: 15px; /* Bordas bem arredondadas */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px; /* Largura máxima para o chat */
+            height: 70%;
+            max-height: 600px; /* Altura máxima para o chat */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .chat-header-modal {
+            background-color: #3CB371; /* Verde médio do seu portfólio */
+            color: white;
+            padding: 15px 20px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Para espaçar o nome do chat e o botão de fechar */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .chat-header-modal h2 {
+            margin: 0;
+            color: white; /* Cor branca para o título do chat */
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-logo-modal {
+            height: 30px; /* Tamanho do seu logo (se tiver) */
+            margin-right: 10px;
+            border-radius: 50%; /* Se o logo for quadrado, faz ele redondo */
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 0 5px;
+            transition: color 0.2s ease;
+        }
+
+        .close-button:hover {
+            color: #d1ffd1; /* Verde pastel suave no hover */
+        }
+
+        .message-area-modal {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f8fff8; /* Um verde pastel muito claro para a área de mensagens */
+            display: flex;
+            flex-direction: column; /* Garante que as mensagens se empilhem */
+        }
+
+        .chat-message {
+            max-width: 75%;
+            padding: 10px 15px;
+            border-radius: 20px; /* Mais arredondado */
+            margin-bottom: 10px;
+            line-height: 1.4;
+            word-wrap: break-word; /* Garante que o texto quebre linhas */
+        }
+
+        .user-message-modal {
+            background-color: #D1FFD1; /* Verde pastel suave para o usuário */
+            align-self: flex-end; /* Alinha à direita */
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .bot-message-modal {
+            background-color: #E6FFE6; /* Verde pastel mais claro para o bot */
+            align-self: flex-start; /* Alinha à esquerda */
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+
+        .input-area-modal {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #e0e0e0;
+            background-color: #fff;
+        }
+
+        .input-area-modal input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 1px solid #ADD8E6; /* Azul claro para o input */
+            border-radius: 25px; /* Campo de input arredondado */
+            font-size: 1em;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-area-modal input:focus {
+            border-color: #3CB371; /* Borda verde ao focar */
+        }
+
+        .input-area-modal button {
+            background-color: #3CB371; /* Verde médio */
+            color: white;
+            border: none;
+            border-radius: 25px; /* Botão arredondado */
+            padding: 12px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            white-space: nowrap; /* Impede que o texto do botão quebre */
+        }
+
+        .input-area-modal button:hover {
+            background-color: #2E8B57; /* Verde escuro no hover */
+            transform: translateY(-1px); /* Pequeno efeito de elevação */
+        }
+
+        /* Responsividade do Modal */
+        @media (max-width: 600px) {
+            .chat-modal-content {
+                width: 95%;
+                height: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Stephany</h1>
+            <h2>Sua Especialista em Canais de Atendimento Digital</h2>
+            <p>Transformando a experiência do cliente através de estratégias inovadoras e eficientes.</p>
+
+            <div class="banner-container">
+                <img src="executivos-cumprimentando-cumprimentando-se.jpg" alt="Banner de Consultoria em Canais Digitais">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="sobre-mim" class="section-padding">
+            <div class="container">
+                <h3>Quem é Stephany?</h3>
+                <p>Olá! Sou **Stephany**, apaixonada por otimizar a forma como empresas se conectam com seus clientes no ambiente digital. Com expertise em inteligência artificial, automação e as melhores práticas de atendimento, estou aqui para ajudar seu negócio a construir canais de comunicação eficientes, que encantam e fidelizam. Minha missão é impulsionar a sua comunicação para o futuro.</p>
+            </div>
+        </section>
+
+        <section id="servicos" class="section-padding background-pastel-green">
+            <div class="container">
+                <h3>Como Posso Ajudar Seu Negócio?</h3>
+                <div class="servicos-grid">
+                    <div class="servico-item">
+                        <h4>Automação de Atendimento</h4>
+                        <p>Implementação e otimização de chatbots, garantindo respostas rápidas e disponibilidade 24/7 para seus clientes.</p>
+                    </div>
+                    <div class="servico-item">
+                        <h4>Estratégias para Canais Digitais</h4>
+                        <p>Criação de roteiros, análise de dados e otimização de performance para WhatsApp Business, redes sociais, e-mail e outros canais.</p>
+                    </div>
+                    <div class="servico-item">
+                        <h4>Jornada do Cliente Digital</h4>
+                        <p>Mapeamento e aprimoramento da experiência do cliente em todos os pontos de contato online, desde o primeiro clique até a fidelização.</p>
+                    </div>
+                    <div class="servico-item">
+                        <h4>Treinamento e Capacitação</h4>
+                        <p>Preparo sua equipe para gerenciar e otimizar os canais de atendimento digital, maximizando o uso das ferramentas e estratégias.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="section-padding text-center">
+            <div class="container">
+                <h3>Precisa de Ajuda para Otimizar seus Canais?</h3>
+                <p>Entre em contato para conversarmos sobre suas necessidades e como posso te ajudar.</p>
+                <a href="mailto:stephanym.barros@gmail.com" class="botao-principal">Fale Comigo por Email</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h4>Sobre Stephany</h4>
+                    <p>Stephany é uma consultora com sólida experiência em **transformação digital**, com foco na otimização de **canais de atendimento ao cliente**. Sua expertise abrange a implementação de **soluções de IA e automação**, como chatbots, para melhorar a eficiência operacional e a satisfação do cliente. Ela é reconhecida por sua habilidade em desenvolver **estratégias de comunicação digital personalizadas**, alinhando tecnologia e as melhores práticas de atendimento para gerar resultados impactantes para empresas de diversos portes.</p>
+                </div>
+                <div class="footer-photo">
+                    <img src="stephany.png" alt="Foto de Stephany" class="profile-photo">
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Stephany - Consultoria em Canais Digitais. Todos os direitos reservados.</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/stephany-barros" target="_blank">LinkedIn</a> |
+                    <a href="mailto:stephanym.barros@gmail.com">Email</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="botaoChatbotFixo" class="botao-chatbot-fixo">
+        Chatbot
+    </button>
+
+    <div class="chat-modal-overlay" id="chatModalOverlay">
+        <div class="chat-modal-content">
+            <div class="chat-header-modal">
+                <h2>
+                    Sté IA
+                </h2>
+                <button class="close-button" onclick="closeChatModal()">&times;</button>
+            </div>
+            <div class="message-area-modal" id="messageAreaModal">
+                </div>
+            <div class="input-area-modal">
+                <input type="text" id="messageInputModal" placeholder="Digite sua mensagem..." onkeydown="handleKeyPress(event)">
+                <button onclick="sendMessageModal()">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // URL do seu Webhook do n8n (MUITO IMPORTANTE: Substitua pelo seu webhook real!)
+        // Este é o URL do nó "When chat message received" do seu workflow no n8n.
+        const N8N_WEBHOOK_URL = 'https://stephany-ceabs.app.n8n.cloud/webhook/87920981-dc6d-44ee-b330-f97a2c4d2dfc/chat';
+
+        // Lógica para abrir e fechar o modal do chat
+        const chatModalOverlay = document.getElementById('chatModalOverlay');
+        const botaoChatbotFixo = document.getElementById('botaoChatbotFixo');
+
+        botaoChatbotFixo.addEventListener('click', () => {
+            chatModalOverlay.style.display = 'flex'; // Exibe o modal
+            // Opcional: Focar no input ao abrir
+            setTimeout(() => {
+                document.getElementById('messageInputModal').focus();
+            }, 100);
+        });
+
+        function closeChatModal() {
+            chatModalOverlay.style.display = 'none'; // Oculta o modal
+        }
+
+        // Função para lidar com a tecla Enter no input
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessageModal();
+            }
+        }
+
+        // Função para enviar mensagem e exibir no chat
+        async function sendMessageModal() {
+            const input = document.getElementById('messageInputModal');
+            const message = input.value.trim();
+            if (message) {
+                displayMessage(message, 'user');
+                input.value = ''; // Limpa o input
+                
+                try {
+                    // Envia a mensagem para o n8n via Webhook
+                    const response = await fetch(N8N_WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            chatInput: message, // Usamos 'chatInput' conforme sua variável no n8n
+                            chatId: 'web-chat-user-123' // Um ID de chat fixo para este exemplo. Você pode gerar um dinâmico se necessário.
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    
+                    // Exibe a resposta da IA. Assumimos que o n8n retornará um JSON com uma chave 'botResponse' ou 'response'
+                    // Verifique o output do seu nó 'Respond to chat' no n8n para saber o nome exato da variável
+                    const botResponse = data.botResponse || data.response; // Tenta 'botResponse' primeiro, senão 'response'
+                    if (botResponse) {
+                        displayMessage(botResponse, 'bot');
+                    } else {
+                        displayMessage("Desculpe, não consegui obter uma resposta válida. [Erro de integração]", 'bot');
+                        console.error("Nenhuma resposta válida recebida do n8n:", data);
+                    }
+
+                } catch (error) {
+                    console.error("Erro ao enviar mensagem para o n8n:", error);
+                    displayMessage("Houve um erro na comunicação. Por favor, tente novamente mais tarde.", 'bot');
+                }
+            }
+        }
+
+        // Função para exibir as mensagens no chat
+        function displayMessage(message, sender) {
+            const messageArea = document.getElementById('messageAreaModal');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message', `${sender}-message-modal`);
+            messageDiv.textContent = message;
+            messageArea.appendChild(messageDiv);
+            messageArea.scrollTop = messageArea.scrollHeight; // Rolagem automática
+        }
+
+        // Mensagem de boas-vindas inicial (opcional)
+        document.addEventListener('DOMContentLoaded', () => {
+            // Se você quiser que o bot dê uma mensagem de boas-vindas logo que o modal abre
+            // displayMessage("Olá! Sou a Sté IA, sua assistente virtual do portfólio da Stephany. Como posso ajudar?", 'bot');
+        });
+
+    </script>
+</body>
+</html>
