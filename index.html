@@ -496,7 +496,7 @@
                 <button class="close-button" onclick="closeChatModal()">&times;</button>
             </div>
             <div class="message-area-modal" id="messageAreaModal">
-                </div>
+            </div>
             <div class="input-area-modal">
                 <input type="text" id="messageInputModal" placeholder="Digite sua mensagem..." onkeydown="handleKeyPress(event)">
                 <button onclick="sendMessageModal()">Enviar</button>
@@ -547,60 +547,61 @@
                 displayMessage(message, 'user');
                 input.value = ''; // Limpa o input
                 
+                // --- CÓDIGO CORRIGIDO ---
                 try {
-                    // ... dentro de async function sendMessageModal() { ...
-try {
-    // ...
-    const data = await response.json();
-    console.log("Resposta recebida do n8n (para depuração):", data); // Esta linha deve mostrar o {text: '...'}
+                    // Envia a mensagem para o n8n via Webhook
+                    const response = await fetch(N8N_WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            chatInput: message, // Usamos 'chatInput' conforme sua variável no n8n
+                            chatId: 'web-chat-user-123' // Um ID de chat fixo para este exemplo. Você pode gerar um dinâmico se necessário.
+                        })
+                    });
 
-    let botResponse;
+                    if (!response.ok) {
+                        // Se a resposta HTTP não for OK (ex: 404, 500), lança um erro
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
 
-    // --- AQUI É A CORREÇÃO! PRIORIZAMOS "data.text" ---
-    if (data.text) { // Se a resposta for direta como {"text": "..."}
-        botResponse = data.text;
-    }
-    // Mantemos as outras verificações como fallback, caso o n8n mude o formato depois
-    else if (data.botResponse) { // Se a resposta for direta como {"botResponse": "..."}
-        botResponse = data.botResponse;
-    } else if (data.response) { // Se for direta como {"response": "..."}
-        botResponse = data.response;
-    } else if (Array.isArray(data) && data.length > 0 && data[0].json && data[0].json.botResponse) {
-        // Se for um array como [{"json": {"botResponse": "..."}}]
-        botResponse = data[0].json.botResponse;
-    } else if (Array.isArray(data) && data.length > 0 && data[0].response) {
-        // Se for um array como [{"response": "..."}]
-        botResponse = data[0].response;
-    } else if (typeof data === 'string') {
-        // Caso a resposta seja uma string pura (menos comum, mas possível)
-        botResponse = data;
-    } else {
-        // Se nenhuma das estruturas esperadas for encontrada
-        console.error("Formato de resposta inesperado do n8n:", data);
-        displayMessage("Desculpe, não consegui obter uma resposta válida. [Erro: Formato de dados inesperado]", 'bot');
-        return; // Sai da função para não exibir mensagem genérica
-    }
-    // --- FIM DA CORREÇÃO ---
+                    const data = await response.json();
+                    console.log("Resposta recebida do n8n (para depuração):", data); // Esta linha deve mostrar o {text: '...'}
 
-    if (botResponse) {
-        displayMessage(botResponse, 'bot');
-    } else {
-        // Este caso só deve acontecer se botResponse for null/undefined APÓS a lógica acima
-        console.error("Resposta da IA vazia após processamento:", data);
-        displayMessage("Desculpe, a IA não retornou uma resposta.", 'bot');
-    }
+                    let botResponse;
 
-} catch (error) {
-    console.error("Erro na comunicação com o n8n:", error);
-    let errorMessage = "Houve um erro na comunicação. Por favor, tente novamente mais tarde.";
-    if (error.message.includes('CORS')) {
-        errorMessage += " (Erro de CORS - verifique o console do navegador)";
-    } else if (error.message.includes('HTTP')) {
-        errorMessage += ` (Erro HTTP: ${error.message.split('status: ')[1]})`;
-    }
-    displayMessage(errorMessage, 'bot');
-}
-// ...
+                    // PRIORIZAMOS "data.text"
+                    if (data.text) { // Se a resposta for direta como {"text": "..."}
+                        botResponse = data.text;
+                    }
+                    // Mantemos as outras verificações como fallback, caso o n8n mude o formato depois
+                    else if (data.botResponse) { // Se a resposta for direta como {"botResponse": "..."}
+                        botResponse = data.botResponse;
+                    } else if (data.response) { // Se for direta como {"response": "..."}
+                        botResponse = data.response;
+                    } else if (Array.isArray(data) && data.length > 0 && data[0].json && data[0].json.botResponse) {
+                        // Se for um array como [{"json": {"botResponse": "..."}}]
+                        botResponse = data[0].json.botResponse;
+                    } else if (Array.isArray(data) && data.length > 0 && data[0].response) {
+                        // Se for um array como [{"response": "..."}]
+                        botResponse = data[0].response;
+                    } else if (typeof data === 'string') {
+                        // Caso a resposta seja uma string pura (menos comum, mas possível)
+                        botResponse = data;
+                    } else {
+                        // Se nenhuma das estruturas esperadas for encontrada
+                        console.error("Formato de resposta inesperado do n8n:", data);
+                        displayMessage("Desculpe, não consegui obter uma resposta válida. [Erro: Formato de dados inesperado]", 'bot');
+                        return; // Sai da função para não exibir mensagem genérica
+                    }
+
+                    if (botResponse) {
+                        displayMessage(botResponse, 'bot');
+                    } else {
+                        // Este caso só deve acontecer se botResponse for null/undefined APÓS a lógica acima
+                        console.error("Resposta da IA vazia após processamento:", data);
+                        displayMessage("Desculpe, a IA não retornou uma resposta.", 'bot');
                     }
 
                 } catch (error) {
@@ -613,6 +614,7 @@ try {
                     }
                     displayMessage(errorMessage, 'bot');
                 }
+                // --- FIM DO CÓDIGO CORRIGIDO ---
             }
         }
 
